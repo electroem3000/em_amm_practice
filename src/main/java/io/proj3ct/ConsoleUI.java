@@ -20,7 +20,7 @@ public class ConsoleUI {
             for (Task t : manager.getTasks()) {
                 System.out.println(t);
             }
-            System.out.println("\nMenu:   " +
+            System.out.println("\nMenu:" +
                     "\n1) Add" +
                     "\n2) Complete" +
                     "\n3) Remove" +
