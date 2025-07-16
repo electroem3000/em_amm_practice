@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <File name="File" fileName="logs/app.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="File"/>
+        </Root>
+        <Logger name="io.proj3ct" level="debug" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+    </Loggers>
+</Configuration>
