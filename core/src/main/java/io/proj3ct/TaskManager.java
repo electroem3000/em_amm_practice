@@ -11,15 +11,17 @@ public class TaskManager {
 
     private List<Task> tasks = new ArrayList<>();
 
-    public void addTask(String description) {
+    public int addTask(String description) {
         logger.debug("Вход в addTask() с описанием задачи: {}", description);
         try {
             Task t = new Task(description);
             tasks.add(t);
             logger.info("Задача добавлена успешно: [{}] {}", t.getId(), description);
+            return t.getId();
         } catch (Exception ex) {
             logger.error("Не удалось добавить задачу: {}", description, ex);
         }
+        return -1;
     }
 
     public List<Task> getTasks() {
