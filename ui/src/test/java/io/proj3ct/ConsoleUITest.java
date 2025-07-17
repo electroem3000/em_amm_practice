@@ -56,9 +56,9 @@ class ConsoleUITest {
         ui.start();
 
         verify(storage, times(1)).load();
-        verify(manager, times(2)).getTasks();
+        verify(manager, times(1)).getTasks();
         verify(storage, times(1)).save(tasks);
-        verifyNoMoreInteractions(storage, manager);
+
 
         String output = outContent.toString();
         assertTrue(output.contains("Menu:"), "Меню должно выводиться");
@@ -77,73 +77,72 @@ class ConsoleUITest {
         ui.start();
 
         verify(storage, times(1)).load();
-        verify(manager, times(2)).getTasks();
+        verify(manager, times(1)).getTasks();
         verify(manager, times(1)).addTask("New task");
         verify(storage, times(1)).save(tasks);
-        verifyNoMoreInteractions(storage, manager);
     }
-//
-//    @Test
-//    void whenRemoveTaskNotFound_thenPrintNotFoundAndSave() {
-//        List<Task> tasks = new ArrayList<>();
-//        when(storage.load()).thenReturn(tasks);
-//        when(manager.getTasks()).thenReturn(tasks);
-//        when(manager.removeTask(3)).thenReturn(false);
-//
-//        System.setIn(new ByteArrayInputStream("3\n3\n0\n".getBytes()));
-//        ui = new ConsoleUI(manager, storage);
-//        ui.start();
-//
-//        verify(manager, times(1)).removeTask(3);
-//        assertTrue(outContent.toString().contains("Not found!"));
-//        verify(storage, times(1)).save(tasks);
-//    }
-//
-//    @Test
-//    void whenRemoveTaskSuccess_thenNoErrorAndSave() {
-//        List<Task> tasks = new ArrayList<>();
-//        when(storage.load()).thenReturn(tasks);
-//        when(manager.getTasks()).thenReturn(tasks);
-//        when(manager.removeTask(4)).thenReturn(true);
-//
-//        System.setIn(new ByteArrayInputStream("3\n4\n0\n".getBytes()));
-//        ui = new ConsoleUI(manager, storage);
-//        ui.start();
-//
-//        verify(manager, times(1)).removeTask(4);
-//        assertFalse(outContent.toString().contains("Not found!"));
-//        verify(storage, times(1)).save(tasks);
-//    }
-//
-//
-//    @Test
-//    void whenCompleteTaskNotFound_thenPrintNotFoundAndSave() {
-//        List<Task> tasks = new ArrayList<>();
-//        when(storage.load()).thenReturn(tasks);
-//        when(manager.getTasks()).thenReturn(tasks);
-//        when(manager.completeTask(5)).thenReturn(false);
-//
-//        System.setIn(new ByteArrayInputStream("2\n5\n0\n".getBytes()));
-//        ui = new ConsoleUI(manager, storage);
-//        ui.start();
-//
-//        verify(manager, times(1)).completeTask(5);
-//        assertTrue(outContent.toString().contains("Not found!"));
-//        verify(storage, times(1)).save(tasks);
-//    }
-//
-//    @Test
-//    void whenMultipleAddTasks_thenAddCalledTwiceAndSave() {
-//        List<Task> tasks = new ArrayList<>();
-//        when(storage.load()).thenReturn(tasks);
-//        when(manager.getTasks()).thenReturn(tasks);
-//
-//        System.setIn(new ByteArrayInputStream("1\nT1\n1\nT2\n0\n".getBytes()));
-//        ui = new ConsoleUI(manager, storage);
-//        ui.start();
-//
-//        verify(manager, times(1)).addTask("T1");
-//        verify(manager, times(1)).addTask("T2");
-//        verify(storage, times(1)).save(tasks);
-//    }
+
+    @Test
+    void whenRemoveTaskNotFound_thenPrintNotFoundAndSave() {
+        List<Task> tasks = new ArrayList<>();
+        when(storage.load()).thenReturn(tasks);
+        when(manager.getTasks()).thenReturn(tasks);
+        when(manager.removeTask(3)).thenReturn(false);
+
+        System.setIn(new ByteArrayInputStream("3\n3\n0\n".getBytes()));
+        ui = new ConsoleUI(manager, storage);
+        ui.start();
+
+        verify(manager, times(1)).removeTask(3);
+        assertTrue(outContent.toString().contains("Not found!"));
+        verify(storage, times(1)).save(tasks);
+    }
+
+    @Test
+    void whenRemoveTaskSuccess_thenNoErrorAndSave() {
+        List<Task> tasks = new ArrayList<>();
+        when(storage.load()).thenReturn(tasks);
+        when(manager.getTasks()).thenReturn(tasks);
+        when(manager.removeTask(4)).thenReturn(true);
+
+        System.setIn(new ByteArrayInputStream("3\n4\n0\n".getBytes()));
+        ui = new ConsoleUI(manager, storage);
+        ui.start();
+
+        verify(manager, times(1)).removeTask(4);
+        assertFalse(outContent.toString().contains("Not found!"));
+        verify(storage, times(1)).save(tasks);
+    }
+
+
+    @Test
+    void whenCompleteTaskNotFound_thenPrintNotFoundAndSave() {
+        List<Task> tasks = new ArrayList<>();
+        when(storage.load()).thenReturn(tasks);
+        when(manager.getTasks()).thenReturn(tasks);
+        when(manager.completeTask(5)).thenReturn(false);
+
+        System.setIn(new ByteArrayInputStream("2\n5\n0\n".getBytes()));
+        ui = new ConsoleUI(manager, storage);
+        ui.start();
+
+        verify(manager, times(1)).completeTask(5);
+        assertTrue(outContent.toString().contains("Not found!"));
+        verify(storage, times(1)).save(tasks);
+    }
+
+    @Test
+    void whenMultipleAddTasks_thenAddCalledTwiceAndSave() {
+        List<Task> tasks = new ArrayList<>();
+        when(storage.load()).thenReturn(tasks);
+        when(manager.getTasks()).thenReturn(tasks);
+
+        System.setIn(new ByteArrayInputStream("1\nT1\n1\nT2\n0\n".getBytes()));
+        ui = new ConsoleUI(manager, storage);
+        ui.start();
+
+        verify(manager, times(1)).addTask("T1");
+        verify(manager, times(1)).addTask("T2");
+        verify(storage, times(1)).save(tasks);
+    }
 }

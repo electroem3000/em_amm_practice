@@ -24,6 +24,12 @@ public class TaskManager {
         return -1;
     }
 
+    public void setTasks(List<Task> tasks) {
+        logger.debug("Вход в setTasks(), количество задач для загрузки: {}", tasks.size());
+        this.tasks.clear();
+        this.tasks.addAll(tasks);
+    }
+
     public List<Task> getTasks() {
         logger.debug("Вход в getTasks(), текущее количество задач: {}", tasks.size());
         return new ArrayList<>(tasks);

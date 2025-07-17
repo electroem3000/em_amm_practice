@@ -14,7 +14,7 @@ public class ConsoleUI {
     }
 
     public void start() {
-        manager.getTasks().addAll(storage.load());
+        manager.setTasks(storage.load());
         while (true) {
             System.out.println("\nMenu:" +
                     "\n1) Add" +
